@@ -1,6 +1,8 @@
+server:
+  port: 8080
 spring:
   application:
-    name: api-gateway
+    name: api_gateway
   cloud:
     gateway:
       discovery:
@@ -18,10 +20,8 @@ spring:
           enabled: false
 
 eureka:
-  instance:
-    instance-id: ${spring.application.name}--${random.uuid}
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URI:http://eureka-server:8761/eureka}
-    instance:
-      preferIpAddress: true
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true
