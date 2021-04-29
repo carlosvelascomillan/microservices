@@ -22,7 +22,6 @@ public class GreetingController {
     public String greeting() {
 
         final Application app = eurekaClient.getApplication(appName);
-        int size = app.size();
-        return "Hola Mundo -> " + app.getName() + ", size -> " + size;
+        return "Hola Mundo -> " + app;
     }
 }
