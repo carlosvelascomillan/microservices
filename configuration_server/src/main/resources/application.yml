@@ -5,7 +5,9 @@ spring:
     config:
       server:
         git:
-          uri: file:///C:/Users/21684500P/Desktop/curso/proyectoFuturs/config-repo/
+          uri: https://github.com/carlosvelascomillan/microservices.git
+          search-paths:
+            - "configuration_server_repository/{application}/{profile}"
         # username:
         # password:
 
