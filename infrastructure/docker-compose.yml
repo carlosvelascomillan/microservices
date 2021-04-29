@@ -28,17 +28,16 @@ services:
             -   MYSQ_ROOT_PASSWORD=root
         networks: 
             -   "docker-networks"
-    api-gateway:
-        image: api_gateway:0.0.1-SNAPSHOT
-        restart: always
-        depends_on: 
-            -   eureka-server
-            -   configuration-server
-        container_name: api-gateway
-        ports:
-            -   "8080:8080"
-        networks: 
-            -   'docker-networks'
-
+    # api-gateway:
+    #    image: api_gateway:0.0.1-SNAPSHOT
+    #    restart: always
+    #    depends_on: 
+    #        -   eureka-server
+    #        -   configuration-server
+    #    container_name: api-gateway
+    #    ports:
+    #        -   "8080:8080"
+    #    networks: 
+    #        -   'docker-networks'
 networks: 
     docker-networks:
