@@ -1,5 +1,6 @@
 package com.geekshubs.patienthistory.infrastructure.kafka;
 
+import com.geekshubs.patienthistory.infrastructure.deserializers.PatientDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,7 @@ public class KafkaConfiguration {
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:29092");
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "patients");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, PatientDeserializer.class);
 
         return new DefaultKafkaConsumerFactory<>(config);
     }
