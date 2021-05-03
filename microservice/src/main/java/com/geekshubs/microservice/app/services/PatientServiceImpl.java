@@ -16,7 +16,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private PatientRepository patientRepository;
-    private KafkaTemplate<String, Patient> kafkaTemplate;
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
+
     private static final String TOPIC = "patients";
 
     @Override
