@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PatientHistoryRepository extends CrudRepository<PatientHistory, String> {
+
+    public PatientHistory findByPatientUUID(final String uuid);
 }

@@ -8,7 +8,7 @@ import com.geekshubs.patienthistory.domain.repositories.PatientLineHistoryReposi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.Date;
 
 @Service
 public class PatientLineHistoryServiceImpl implements PatientLineHistoryService {
@@ -25,12 +25,14 @@ public class PatientLineHistoryServiceImpl implements PatientLineHistoryService 
 
     @Override
     public PatientLineHistory save(String patientUUID, PatientLineHistory patientLineHistory) throws PatientHistoryNotFoundException {
-        Optional<PatientHistory> patientHistory = patientHistoryRepository.findById(patientUUID);
-        if (!patientHistory.isPresent()) {
+        PatientHistory patientHistory = patientHistoryRepository.findByPatientUUID(patientUUID);
+
+        if (patientHistory == null) {
             throw new PatientHistoryNotFoundException("History not found");
         }
 
-        patientLineHistory.setPatientHistory(patientHistory.get());
+        patientLineHistory.setPatientHistory(patientHistory);
+        patientLineHistory.setDateCreated(new Date());
         return patientLineHistoryRepository.save(patientLineHistory);
     }
 }
