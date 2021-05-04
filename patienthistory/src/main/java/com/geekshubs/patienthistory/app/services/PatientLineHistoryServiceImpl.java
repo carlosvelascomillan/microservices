@@ -31,7 +31,7 @@ public class PatientLineHistoryServiceImpl implements PatientLineHistoryService 
             throw new PatientHistoryNotFoundException("History not found");
         }
 
-        patientLineHistory.setPatientHistory(patientHistory);
+        patientLineHistory.setCabUuid(patientHistory.getUuid());
         patientLineHistory.setDateCreated(new Date());
         return patientLineHistoryRepository.save(patientLineHistory);
     }

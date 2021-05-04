@@ -1,5 +1,7 @@
 package com.geekshubs.patienthistory.domain.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "PATIENTHISTORY")
+@Data
 public class PatientHistory implements Serializable {
 
     private static final long serialVersionUID=1L;
@@ -30,7 +33,8 @@ public class PatientHistory implements Serializable {
     @Column
     private String specialty;
 
-    @OneToMany(mappedBy = "patientHistory", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cab_uuid")
     private List<PatientLineHistory> patientLineHistory;
 
     public PatientHistory() {
@@ -42,61 +46,5 @@ public class PatientHistory implements Serializable {
         this.patientUUID = patientUUID;
         this.doctor = doctor;
         this.specialty = specialty;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public String getPatientName() {
-        return patientName;
-    }
-
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
-    }
-
-    public String getPatientLastName() {
-        return patientLastName;
-    }
-
-    public void setPatientLastName(String patientLastName) {
-        this.patientLastName = patientLastName;
-    }
-
-    public String getPatientUUID() {
-        return patientUUID;
-    }
-
-    public void setPatientUUID(String patientUUID) {
-        this.patientUUID = patientUUID;
-    }
-
-    public String getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(String doctor) {
-        this.doctor = doctor;
-    }
-
-    public String getSpecialty() {
-        return specialty;
-    }
-
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
-    }
-
-    public List<PatientLineHistory> getPatientLineHistory() {
-        return patientLineHistory;
-    }
-
-    public void setPatientLineHistory(List<PatientLineHistory> patientLineHistory) {
-        this.patientLineHistory = patientLineHistory;
     }
 }

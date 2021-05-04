@@ -27,4 +27,9 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
             throw new PatientHistoryException(e.getMessage());
         }
     }
+
+    @Override
+    public PatientHistory getAllHistoryByUUID(String uuid) {
+        return patientHistoryRepository.findByPatientUUID(uuid);
+    }
 }

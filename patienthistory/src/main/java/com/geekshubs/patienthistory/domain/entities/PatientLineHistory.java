@@ -1,5 +1,6 @@
 package com.geekshubs.patienthistory.domain.entities;
 
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "HISTORYLINES")
+@Data
 public class PatientLineHistory {
 
     private static final long serialVersionUID=1L;
@@ -30,9 +32,8 @@ public class PatientLineHistory {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateCreated;
 
-    @ManyToOne()
-    @JoinColumn(name = "cab_uuid")
-    private PatientHistory patientHistory;
+    @Column(name="cab_uuid")
+    private String cabUuid;
 
     public PatientLineHistory() {
     }
@@ -43,51 +44,4 @@ public class PatientLineHistory {
         this.doctor = doctor;
     }
 
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public String getActo() {
-        return acto;
-    }
-
-    public void setActo(String acto) {
-        this.acto = acto;
-    }
-
-    public String getPrueba() {
-        return prueba;
-    }
-
-    public void setPrueba(String prueba) {
-        this.prueba = prueba;
-    }
-
-    public String getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(String doctor) {
-        this.doctor = doctor;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public PatientHistory getPatientHistory() {
-        return patientHistory;
-    }
-
-    public void setPatientHistory(PatientHistory patientHistory) {
-        this.patientHistory = patientHistory;
-    }
 }

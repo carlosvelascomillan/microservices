@@ -6,4 +6,5 @@ import com.geekshubs.patienthistory.domain.exceptions.PatientHistoryException;
 public interface PatientHistoryService {
 
     public void save(PatientHistory patientHistory) throws PatientHistoryException;
+    public PatientHistory getAllHistoryByUUID(final String uuid);
 }

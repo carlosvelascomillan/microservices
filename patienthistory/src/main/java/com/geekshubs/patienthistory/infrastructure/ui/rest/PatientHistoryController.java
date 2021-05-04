@@ -1,6 +1,8 @@
 package com.geekshubs.patienthistory.infrastructure.ui.rest;
 
+import com.geekshubs.patienthistory.app.services.PatientHistoryService;
 import com.geekshubs.patienthistory.app.services.PatientLineHistoryService;
+import com.geekshubs.patienthistory.domain.entities.PatientHistory;
 import com.geekshubs.patienthistory.domain.entities.PatientLineHistory;
 import com.geekshubs.patienthistory.domain.exceptions.PatientHistoryNotFoundException;
 import org.slf4j.Logger;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/patients")
@@ -16,15 +19,12 @@ public class PatientHistoryController {
 
     private Logger logger = LoggerFactory.getLogger(PatientHistoryController.class);
     private PatientLineHistoryService patientLineHistoryService;
+    private PatientHistoryService patientHistoryService;
 
     @Autowired
-    public PatientHistoryController(PatientLineHistoryService patientLineHistoryService) {
+    public PatientHistoryController(PatientLineHistoryService patientLineHistoryService, PatientHistoryService patientHistoryService) {
         this.patientLineHistoryService = patientLineHistoryService;
-    }
-
-    @GetMapping("/home")
-    public ResponseEntity<Void> home() {
-        return new ResponseEntity("Es una prueba", HttpStatus.OK);
+        this.patientHistoryService = patientHistoryService;
     }
 
     @PostMapping("/{uuid}")
@@ -39,5 +39,11 @@ public class PatientHistoryController {
             logger.error(e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/getAllHistory/{uuid}")
+    public Flux<PatientHistory> getAllHistory(@PathVariable("uuid") final String uuid) {
+
+        return Flux.just(patientHistoryService.getAllHistoryByUUID(uuid));
     }
 }
