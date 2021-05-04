@@ -1,10 +1,8 @@
 package com.geekshubs.patienthistory.domain.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,7 +12,7 @@ public class PatientHistory implements Serializable {
     private static final long serialVersionUID=1L;
 
     @Id
-    @Column(name = "uuid", length = 16, unique = true, nullable = false)
+    @Column(name = "uuid", length = 16, unique = true, nullable = false, insertable = false, updatable = false)
     private String uuid = UUID.randomUUID().toString();
 
     @Column(name = "patient_name")
@@ -31,6 +29,20 @@ public class PatientHistory implements Serializable {
 
     @Column
     private String specialty;
+
+    @OneToMany(mappedBy = "patientHistory", cascade = CascadeType.ALL)
+    private List<PatientLineHistory> patientLineHistory;
+
+    public PatientHistory() {
+    }
+
+    public PatientHistory(String patientName, String patientLastName, String patientUUID, String doctor, String specialty) {
+        this.patientName = patientName;
+        this.patientLastName = patientLastName;
+        this.patientUUID = patientUUID;
+        this.doctor = doctor;
+        this.specialty = specialty;
+    }
 
     public String getUuid() {
         return uuid;
@@ -80,14 +92,11 @@ public class PatientHistory implements Serializable {
         this.specialty = specialty;
     }
 
-    public PatientHistory() {
+    public List<PatientLineHistory> getPatientLineHistory() {
+        return patientLineHistory;
     }
 
-    public PatientHistory(String patientName, String patientLastName, String patientUUID, String doctor, String specialty) {
-        this.patientName = patientName;
-        this.patientLastName = patientLastName;
-        this.patientUUID = patientUUID;
-        this.doctor = doctor;
-        this.specialty = specialty;
+    public void setPatientLineHistory(List<PatientLineHistory> patientLineHistory) {
+        this.patientLineHistory = patientLineHistory;
     }
 }
