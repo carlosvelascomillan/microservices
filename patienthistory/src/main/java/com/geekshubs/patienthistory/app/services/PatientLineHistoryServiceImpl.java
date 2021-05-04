@@ -2,7 +2,7 @@ package com.geekshubs.patienthistory.app.services;
 
 import com.geekshubs.patienthistory.domain.entities.PatientHistory;
 import com.geekshubs.patienthistory.domain.entities.PatientLineHistory;
-import com.geekshubs.patienthistory.domain.exceptions.PatientHistoryException;
+import com.geekshubs.patienthistory.domain.exceptions.PatientHistoryNotFoundException;
 import com.geekshubs.patienthistory.domain.repositories.PatientHistoryRepository;
 import com.geekshubs.patienthistory.domain.repositories.PatientLineHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,10 @@ public class PatientLineHistoryServiceImpl implements PatientLineHistoryService 
     }
 
     @Override
-    public PatientLineHistory save(String patientUUID, PatientLineHistory patientLineHistory) throws PatientHistoryException {
+    public PatientLineHistory save(String patientUUID, PatientLineHistory patientLineHistory) throws PatientHistoryNotFoundException {
         Optional<PatientHistory> patientHistory = patientHistoryRepository.findById(patientUUID);
         if (!patientHistory.isPresent()) {
-            throw new PatientHistoryException("History not found");
+            throw new PatientHistoryNotFoundException("History not found");
         }
 
         patientLineHistory.setPatientHistory(patientHistory.get());

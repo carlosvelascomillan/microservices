@@ -2,7 +2,7 @@ package com.geekshubs.patienthistory.infrastructure.ui.rest;
 
 import com.geekshubs.patienthistory.app.services.PatientLineHistoryService;
 import com.geekshubs.patienthistory.domain.entities.PatientLineHistory;
-import com.geekshubs.patienthistory.domain.exceptions.PatientHistoryException;
+import com.geekshubs.patienthistory.domain.exceptions.PatientHistoryNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class PatientHistoryController {
 
         try {
             return new ResponseEntity<>(patientLineHistoryService.save(uuid, patientLineHistory), HttpStatus.OK);
-        } catch (PatientHistoryException e) {
+        } catch (PatientHistoryNotFoundException e) {
             logger.error(e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
