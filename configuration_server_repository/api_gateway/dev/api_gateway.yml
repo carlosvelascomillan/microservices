@@ -31,7 +31,7 @@ keycloak:
   resource: springboot-microservice
   credentials:
     secret: c41c01c6-52f9-47be-a7d6-3cfc87e4f751
-  user-resource-role-mappings: true
+  use-resource-role-mappings: true
   bearer-only: true
 
 eureka:
