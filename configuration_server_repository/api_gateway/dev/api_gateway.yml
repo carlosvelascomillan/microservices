@@ -36,7 +36,7 @@ security:
             client-id: springboot-microservice
             client-secret: 9818dc1c-3f17-4dbc-883a-c056b14db47e
             provider: keycloak
-            authorization-grant-type: client_credentials
+            authorization-grant-type: authorization_code
             redirect-url: http://localhost:8080/login/oauth2/code/spring-cloud-gateway-client
 
 #keycloak:
