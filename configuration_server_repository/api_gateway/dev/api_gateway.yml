@@ -30,7 +30,7 @@ keycloak:
   ssl-required: external
   resource: springboot-microservice
   credentials:
-    secret: c41c01c6-52f9-47be-a7d6-3cfc87e4f751
+    secret: 9818dc1c-3f17-4dbc-883a-c056b14db47e
   use-resource-role-mappings: true
   bearer-only: true
 
