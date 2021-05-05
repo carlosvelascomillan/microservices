@@ -27,6 +27,11 @@ public class PatientHistoryController {
         this.patientHistoryService = patientHistoryService;
     }
 
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello world";
+    }
+
     @PostMapping("/{uuid}")
     public ResponseEntity<PatientLineHistory> saveLine(@RequestBody PatientLineHistory patientLineHistory,
                                                        @PathVariable("uuid") final String uuid) {
