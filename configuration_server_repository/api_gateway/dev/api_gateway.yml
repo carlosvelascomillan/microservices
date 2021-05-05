@@ -24,15 +24,30 @@ spring:
         ribbon:
           enabled: false
 
-keycloak:
-  realm: Futurs
-  auth-server-url: http://localhost:8080/auth
-  ssl-required: external
-  resource: springboot-microservice
-  credentials:
-    secret: 9818dc1c-3f17-4dbc-883a-c056b14db47e
-  use-resource-role-mappings: true
-  bearer-only: true
+security:
+  oauth2:
+    client:
+      provider:
+        keycloak:
+          issuer-uri: http://localhost:8091/auth/realms/futurs
+      registration:
+        spring-cloud: 
+          gateway-client:
+            client-id: springboot-microservice
+            client-secret: 9818dc1c-3f17-4dbc-883a-c056b14db47e
+            provider: keycloak
+            authorization-grant-type: authorization_code
+            redirect-url: http://localhost:8080/login/oauth2/code/spring-cloud-gateway-client
+
+#keycloak:
+#  realm: Futurs
+#  auth-server-url: http://localhost:8080/auth
+#  ssl-required: external
+#  resource: springboot-microservice
+#  credentials:
+#    secret: 9818dc1c-3f17-4dbc-883a-c056b14db47e
+#  use-resource-role-mappings: true
+#  bearer-only: true
 
 eureka:
   client:
